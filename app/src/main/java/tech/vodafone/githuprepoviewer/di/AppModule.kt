@@ -25,7 +25,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRemoteSource(): RemoteDataSource {
-        return RemoteDataSourceImpl(RetrofitInstance().api)
+        return RemoteDataSourceImpl(RetrofitInstance.api)
     }
 
     /**

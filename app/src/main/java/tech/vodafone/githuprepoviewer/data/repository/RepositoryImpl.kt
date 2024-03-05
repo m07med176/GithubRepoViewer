@@ -9,17 +9,20 @@ import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
+import tech.vodafone.githuprepoviewer.data.source.local.LocalDataSource
+import tech.vodafone.githuprepoviewer.data.source.remote.RemoteDataSource
 import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.CallApi
 import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 import tech.vodafone.githuprepoviewer.data.utils.asResourceFlow
 import javax.inject.Inject
 
 class RepositoryImpl  @Inject constructor(
-    private val api: CallApi,
+    private val localDataSource:LocalDataSource,
+    private val remoteDataSource: RemoteDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : Repository {
     override suspend fun getRepositories(): Flow<NetworkResponse<RepositoriesResponse, BadeResponse>> =
-        flowOf(api.getRepositories())
+        flowOf(remoteDataSource.getRepositories())
             .flowOn(ioDispatcher)
             .asResourceFlow()
 
@@ -27,7 +30,7 @@ class RepositoryImpl  @Inject constructor(
         owner: String,
         repo: String
     ): Flow<NetworkResponse<RepositoryIssuesResponse, BadeResponse>> =
-        flowOf(api.getRepositoryIssues(owner = owner, repo = repo))
+        flowOf(remoteDataSource.getRepositoryIssues(owner = owner, repo = repo))
             .flowOn(ioDispatcher)
             .asResourceFlow()
 
@@ -35,7 +38,7 @@ class RepositoryImpl  @Inject constructor(
         owner: String,
         repo: String
     ): Flow<NetworkResponse<RepositoryDetailsResponse, BadeResponse>> =
-        flowOf(api.getRepositoryDetails(owner = owner, repo = repo))
+        flowOf(remoteDataSource.getRepositoryDetails(owner = owner, repo = repo))
             .flowOn(ioDispatcher)
             .asResourceFlow()
 }
