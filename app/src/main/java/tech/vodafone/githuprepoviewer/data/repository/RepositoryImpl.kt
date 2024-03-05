@@ -14,12 +14,14 @@ import tech.vodafone.githuprepoviewer.data.source.remote.RemoteDataSource
 import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.CallApi
 import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 import tech.vodafone.githuprepoviewer.data.utils.asResourceFlow
+import tech.vodafone.githuprepoviewer.di.IoDispatcher
 import javax.inject.Inject
 
 class RepositoryImpl  @Inject constructor(
     private val localDataSource:LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    @IoDispatcher
+    private val ioDispatcher: CoroutineDispatcher
 ) : Repository {
     override suspend fun getRepositories(): Flow<NetworkResponse<RepositoriesResponse, BadeResponse>> =
         flowOf(remoteDataSource.getRepositories())
