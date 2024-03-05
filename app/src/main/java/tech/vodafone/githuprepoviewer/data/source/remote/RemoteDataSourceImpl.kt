@@ -12,14 +12,14 @@ import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 class RemoteDataSourceImpl(
     private val api: CallApi
 ) : RemoteDataSource {
-    override fun getRepositories() = api.getRepositories()
+    override suspend fun getRepositories() = api.getRepositories()
 
-    override fun getRepositoryIssues(
+    override suspend fun getRepositoryIssues(
         owner: String,
         repo: String
     ) = api.getRepositoryIssues(owner = owner, repo = repo)
 
-    override fun getRepositoryDetails(
+    override suspend fun getRepositoryDetails(
         owner: String,
         repo: String
     ) = api.getRepositoryDetails(owner = owner, repo = repo)

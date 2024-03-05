@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class BadeResponse(
     @SerializedName("documentation_url")
-    val documentationUrl: String?,
+    val documentationUrl: String? = null,
     @SerializedName("message")
-    val message: String?
+    val message: String? = null
 )

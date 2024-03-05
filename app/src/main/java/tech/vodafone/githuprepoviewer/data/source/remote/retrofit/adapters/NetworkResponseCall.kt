@@ -65,7 +65,7 @@ internal class NetworkResponseCall<S : Any, E : Any>(
                     is IOException -> NetworkResponse.NetworkError(throwable)
                     else -> NetworkResponse.UnknownError(throwable)
                 }
-                Log.e("ApiError","${throwable.message}")
+                Log.e("ApiError","${throwable?.message}")
                 callback.onResponse(this@NetworkResponseCall, Response.success(networkResponse))
             }
         })

@@ -12,7 +12,7 @@ import tech.vodafone.githuprepoviewer.presentation.utils.ScreenState
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(private val repository: Repository):
+class RepoIssuesViewModel @Inject constructor(private val repository: Repository):
     BaseScreenViewModel<IssuesRepoUIData, IssuesRepoEvents>(
         initialScreenState = ScreenState.Loading(),
         dataState = IssuesRepoUIData()

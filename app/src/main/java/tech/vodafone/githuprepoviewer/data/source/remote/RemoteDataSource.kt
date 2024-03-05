@@ -11,14 +11,14 @@ import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.EndPoints
 import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 
 interface RemoteDataSource {
-    fun getRepositories(): NetworkResponse<RepositoriesResponse, BadeResponse>
+    suspend fun getRepositories(): NetworkResponse<RepositoriesResponse, BadeResponse>
 
-    fun getRepositoryIssues(
+    suspend fun getRepositoryIssues(
         owner: String,
         repo: String,
     ): NetworkResponse<RepositoryIssuesResponse, BadeResponse>
 
-    fun getRepositoryDetails(
+    suspend fun getRepositoryDetails(
         owner: String,
         repo: String,
     ): NetworkResponse<RepositoryDetailsResponse, BadeResponse>

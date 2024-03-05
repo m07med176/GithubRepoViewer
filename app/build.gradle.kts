@@ -38,19 +38,19 @@ android {
         properties.load(project.rootProject.file("local.properties").inputStream())
 
         debug {
-            isMinifyEnabled = true
+//            isMinifyEnabled = true
             isDebuggable = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+//            )
             buildConfigField("String", "BASE_URL", "\"${properties["DEBUG_URL"]}\"")
         }
         release {
-            isMinifyEnabled = false
+//            isMinifyEnabled = false
             isDebuggable = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+//            )
             buildConfigField("String", "BASE_URL", "\"${properties["RELEASE_URL"]}\"")
         }
     }
@@ -163,10 +163,16 @@ dependencies {
 //    kaptTest(libs.hilt.android.compiler)
 
     // Retrofit
-    implementation (libs.retrofit2)
-    implementation (libs.retrofit2.gson)
-    implementation (libs.retrofit2.logging)
+//    implementation (libs.retrofit2)
+//    implementation (libs.retrofit2.gson)
+//    implementation (libs.retrofit2.logging)
 
+    //Networking libraries
+    implementation(dependencyNotation = "com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(dependencyNotation = "com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(dependencyNotation = "com.google.code.gson:gson:2.10")
+    implementation(dependencyNotation = "com.squareup.okhttp3:okhttp:5.0.0-alpha.5")
+    implementation(dependencyNotation = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5")
 
 
     // Worker

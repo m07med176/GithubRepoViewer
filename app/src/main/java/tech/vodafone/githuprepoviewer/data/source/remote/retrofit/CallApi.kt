@@ -12,19 +12,20 @@ import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 /**
  * # Network API
  */
+@JvmSuppressWildcards
 interface CallApi {
 
     @GET(EndPoints.REPOSITORIES)
-    fun getRepositories():NetworkResponse<RepositoriesResponse,BadeResponse>
+    suspend fun getRepositories():NetworkResponse<RepositoriesResponse,BadeResponse>
 
     @GET(EndPoints.REPOSITORY_ISSUES)
-    fun getRepositoryIssues(
+    suspend fun getRepositoryIssues(
         @Path("owner") owner:String,
         @Path("repo") repo:String,
     ):NetworkResponse<RepositoryIssuesResponse,BadeResponse>
 
     @GET(EndPoints.REPOSITORY_DETAILS)
-    fun getRepositoryDetails(
+    suspend fun getRepositoryDetails(
         @Path("owner") owner:String,
         @Path("repo") repo:String,
     ):NetworkResponse<RepositoryDetailsResponse,BadeResponse>
