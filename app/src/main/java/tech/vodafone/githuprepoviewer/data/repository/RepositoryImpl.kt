@@ -12,8 +12,9 @@ import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
 import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.CallApi
 import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 import tech.vodafone.githuprepoviewer.data.utils.asResourceFlow
+import javax.inject.Inject
 
-class RepositoryImpl (
+class RepositoryImpl  @Inject constructor(
     private val api: CallApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : Repository {

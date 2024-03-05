@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import tech.vodafone.githuprepoviewer.BuildConfig
 import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.adapters.NetworkResponseAdapterFactory
 import java.util.concurrent.TimeUnit
 
@@ -47,9 +48,9 @@ import java.util.concurrent.TimeUnit
  */
 class RetrofitInstance() {
     private val retrofit: Retrofit by lazy {
-//        val baseUrl = BuildConfig.BASE_URL
+        val baseUrl = "BuildConfig.BASE_URL"
         Retrofit.Builder()
-            .baseUrl("baseUrl")
+            .baseUrl(baseUrl)
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(cashAndLoggerManager())
