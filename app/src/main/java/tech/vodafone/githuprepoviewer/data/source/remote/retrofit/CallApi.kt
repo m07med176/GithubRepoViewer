@@ -4,8 +4,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
+import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 
 

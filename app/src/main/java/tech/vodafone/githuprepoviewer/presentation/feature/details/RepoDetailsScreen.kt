@@ -35,15 +35,6 @@ fun RepoDetailsScreen(
 
 
     screenState.AnimateScreenState(
-        onLoading = {
-            Text(text = "Loading ..")
-        },
-        onError = {
-            it?.let { Text(text = it) }
-        },
-        onNothing = {
-            Text(text = "Nothing ..")
-        },
         onStable = {
             Column(
                 modifier = modifier.fillMaxSize(),

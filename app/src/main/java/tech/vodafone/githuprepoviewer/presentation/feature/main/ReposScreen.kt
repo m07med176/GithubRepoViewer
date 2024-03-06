@@ -34,15 +34,6 @@ fun ReposScreen(
     }
 
     screenState.AnimateScreenState(
-        onLoading = {
-            Text(text = "Loading ..")
-        },
-        onError = {
-            it?.let {  Text(text = it) }
-        },
-        onNothing = {
-            Text(text = "Nothing ..")
-        },
         onStable = {
             LazyColumn(
                 modifier = modifier.fillMaxSize(),

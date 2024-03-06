@@ -32,15 +32,6 @@ fun IssuesScreen(
     }
 
     screenState.AnimateScreenState(
-        onLoading = {
-            Text(text = "Loading ..")
-        },
-        onError = {
-            it?.let {  Text(text = it) }
-        },
-        onNothing = {
-            Text(text = "Nothing ..")
-        },
         onStable = {
             LazyColumn(modifier = modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
                 uiState.repoIssues?.let {
