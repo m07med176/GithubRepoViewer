@@ -1,6 +1,7 @@
 package tech.vodafone.githuprepoviewer.presentation.feature.main
 
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
+import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 import tech.vodafone.githuprepoviewer.presentation.utils.UIModelBase
 
 
@@ -25,6 +26,16 @@ fun RepositoriesResponse.toUIModel() =
             description = it.description,
             owner = it.owner?.login,
             starCount = it.id
+        )
+    }
+
+fun RepositoriesResponseModel.toUIModel() =
+    run {
+        ReposUIData.ReposModel(
+            name = name,
+            description = description,
+            owner = owner?.login,
+            starCount = id
         )
     }
 

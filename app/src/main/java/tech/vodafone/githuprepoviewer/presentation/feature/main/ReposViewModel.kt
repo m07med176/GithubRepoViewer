@@ -1,6 +1,7 @@
 package tech.vodafone.githuprepoviewer.presentation.feature.main
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -19,6 +20,9 @@ class ReposViewModel @Inject constructor(private val repository: Repository):
     private var _stateSearch: MutableSharedFlow<List<String>> = MutableSharedFlow()
     var stateSearch = _stateSearch.asSharedFlow()
 
+
+    val pagingData = repository.getPagingCash()
+        .cachedIn(viewModelScope)
     override fun onEvent(event: ReposEvents){
         when(event){
             is ReposEvents.GetRepos -> getRepositories()

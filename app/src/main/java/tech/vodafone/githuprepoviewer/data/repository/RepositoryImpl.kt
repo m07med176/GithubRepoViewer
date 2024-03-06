@@ -1,5 +1,8 @@
 package tech.vodafone.githuprepoviewer.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -7,6 +10,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
+import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
 import tech.vodafone.githuprepoviewer.data.source.local.LocalDataSource
@@ -22,14 +26,20 @@ class RepositoryImpl  @Inject constructor(
     @IoDispatcher
     private val ioDispatcher: CoroutineDispatcher
 ) : Repository {
+    override fun getPagingCash(): Flow<PagingData<RepositoriesResponseModel>>
+     = Pager(PagingConfig(
+         pageSize = 10,
+         prefetchDistance = 20
+     )){
+         localDataSource.getPagingCash()
+    }.flow
+
     override suspend fun getRepositories(): Flow<NetworkResponse<RepositoriesResponse, BadeResponse>> = flow {
         val response = remoteDataSource.getRepositories()
        when(response){
            is NetworkResponse.Success -> {
                if (localDataSource.getCashCount()  == 0){
-                   response.body.forEach{ item->
-                       localDataSource.insertCash(item)
-                   }
+                   localDataSource.insertCash(response.body)
                }
            }
            else -> {}

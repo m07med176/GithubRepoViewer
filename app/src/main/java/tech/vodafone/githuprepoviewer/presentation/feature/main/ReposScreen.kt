@@ -50,6 +50,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import kotlinx.coroutines.launch
 import tech.vodafone.githuprepoviewer.presentation.navigation.NavigationEvent
 import tech.vodafone.githuprepoviewer.presentation.utils.AnimateScreenState
@@ -117,12 +120,12 @@ fun ReposScreen(
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
 
-    val searchState = viewModel.stateSearch.collectAsState(emptyList())
+    val searchState = viewModel.pagingData.collectAsLazyPagingItems()
 
 
-    LaunchedEffect(true){
-        viewModel.onEvent(ReposEvents.GetRepos)
-    }
+//    LaunchedEffect(true){
+//        viewModel.onEvent(ReposEvents.GetRepos)
+//    }
 
     Column {
 
@@ -154,24 +157,34 @@ fun ReposScreen(
         }
 
 
-        screenState.AnimateScreenState(
-            onStable = {
-                LazyColumn(modifier = modifier.fillMaxSize(),) {
-                    uiState.repos?.let {
-                        items(it) { data ->
-                            CategoryItem(data){
-                                navController.onEvent(
-                                    NavigationEvent.GoToRepositoryDetailsScreen(
-                                        repo = data.name ?: "",
-                                        owner = data.owner ?: ""
-                                    )
+        LazyColumn(modifier = modifier.fillMaxSize(),) {
+//            uiState.repos?.let {
+                items(
+                    count = searchState.itemCount,
+                    key = searchState.itemKey{ item -> item.id},
+                    contentType = searchState.itemContentType { "Repos" }
+                ) { index ->
+                    val repo = searchState[index]
+                    repo?.let {
+                        val data = it.toUIModel()
+                        CategoryItem(data){
+                            navController.onEvent(
+                                NavigationEvent.GoToRepositoryDetailsScreen(
+                                    repo = data.name ?: "",
+                                    owner = data.owner ?: ""
                                 )
-                            }
+                            )
                         }
-                    }
+//                    }
                 }
-            },
-        )
+
+            }
+        }
+//        screenState.AnimateScreenState(
+//            onStable = {
+//
+//            },
+//        )
     }
 
 

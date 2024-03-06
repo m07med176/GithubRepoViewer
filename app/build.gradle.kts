@@ -1,13 +1,6 @@
 import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
-//plugins {
-//    alias(libs.plugins.android.application)
-//    alias(libs.plugins.kotlin.android)
-//    alias(libs.plugins.kotlin.kapt)
-//    alias(libs.plugins.hilt.gradle)
-//}
-
 plugins {
     id(id = "com.android.application")
     id(id = "kotlin-android")
@@ -38,19 +31,19 @@ android {
         properties.load(project.rootProject.file("local.properties").inputStream())
 
         debug {
-//            isMinifyEnabled = true
+            isMinifyEnabled = false
             isDebuggable = true
-//            proguardFiles(
-//                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-//            )
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
             buildConfigField("String", "BASE_URL", "\"${properties["DEBUG_URL"]}\"")
         }
         release {
-//            isMinifyEnabled = false
+            isMinifyEnabled = false
             isDebuggable = false
-//            proguardFiles(
-//                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-//            )
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
             buildConfigField("String", "BASE_URL", "\"${properties["RELEASE_URL"]}\"")
         }
     }
@@ -86,12 +79,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
-
     // Arch Components
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
-
 
     // Compose
     implementation(libs.androidx.compose.ui)
@@ -108,40 +99,16 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     // Instrumented tests: jUnit rules and runners
-
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
 
-//    implementation(libs.ui)
-//    implementation(libs.core.ktx)
-//    testImplementation(libs.junit)
-//    implementation(libs.material3)
-//    implementation(libs.ui.graphics)
-//    debugImplementation(libs.ui.tooling)
-//    implementation(libs.activity.compose)
-//    implementation(libs.ui.tooling.preview)
-//    debugImplementation(libs.ui.test.manifest)
-//    implementation(platform(libs.compose.bom))
-//    implementation(libs.lifecycle.runtime.ktx)
-//    androidTestImplementation(libs.espresso.core)
-//    androidTestImplementation(libs.ui.test.junit4)
-//    androidTestImplementation(platform(libs.compose.bom))
-//    androidTestImplementation(libs.androidx.test.ext.junit)
-
-    // Dagger Hilt
-//    kapt(libs.hilt.compiler)
-//    kapt(libs.androidx.hilt.compiler)
-//    implementation(libs.hilt.work)
-//    implementation(libs.hilt.android)
-//    implementation(libs.hilt.navigation.compose)
-
+    // Paging 3
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.paging:paging-compose:3.2.1")
+    implementation("androidx.room:room-paging:2.6.1")
 
     // Room
-//    implementation(libs.room.ktx)
-//    implementation(libs.room.runtime)
-//    implementation(libs.room.compiler)
-
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
@@ -153,26 +120,11 @@ dependencies {
     kapt(dependencyNotation = "androidx.hilt:hilt-compiler:1.1.0")
     implementation(dependencyNotation = "androidx.hilt:hilt-work:1.1.0")
 
-//    implementation(libs.hilt.android)
-//    kapt(libs.hilt.compiler)
-    // Hilt and instrumented tests.
-//    androidTestImplementation(libs.hilt.android.testing)
-//    kaptAndroidTest(libs.hilt.android.compiler)
-    // Hilt and Robolectric tests.
-//    testImplementation(libs.hilt.android.testing)
-//    kaptTest(libs.hilt.android.compiler)
 
     // Retrofit
     implementation (libs.retrofit2)
     implementation (libs.retrofit2.gson)
     implementation (libs.retrofit2.logging)
-
-    //Networking libraries
-//    implementation(dependencyNotation = "com.squareup.retrofit2:retrofit:2.9.0")
-//    implementation(dependencyNotation = "com.squareup.retrofit2:converter-gson:2.9.0")
-//    implementation(dependencyNotation = "com.google.code.gson:gson:2.10")
-//    implementation(dependencyNotation = "com.squareup.okhttp3:okhttp:5.0.0-alpha.5")
-//    implementation(dependencyNotation = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5")
 
 
     // Worker
@@ -184,9 +136,9 @@ dependencies {
 
     // Lottie
     implementation(libs.ui.lottie.compose)
-//     Accompanist
+
+    // Accompanist
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.insets)
-
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta")
 }
