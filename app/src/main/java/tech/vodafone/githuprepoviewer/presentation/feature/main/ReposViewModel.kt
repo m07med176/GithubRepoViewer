@@ -8,15 +8,11 @@ import kotlinx.coroutines.launch
 import tech.vodafone.githuprepoviewer.data.repository.Repository
 import tech.vodafone.githuprepoviewer.data.utils.onEach
 import tech.vodafone.githuprepoviewer.presentation.utils.BaseScreenViewModel
-import tech.vodafone.githuprepoviewer.presentation.utils.ScreenState
 import javax.inject.Inject
 
 @HiltViewModel
 class ReposViewModel @Inject constructor(private val repository: Repository):
-    BaseScreenViewModel<ReposUIData, ReposEvents>(
-        initialScreenState = ScreenState.Loading(),
-        dataState = ReposUIData()
-    ) {
+    BaseScreenViewModel<ReposUIData, ReposEvents>(ReposUIData()) {
 
     override fun onEvent(event: ReposEvents){
         when(event){
@@ -31,8 +27,13 @@ class ReposViewModel @Inject constructor(private val repository: Repository):
                 .onEach(
                 onLoading = { toLoadingScreenState() },
                 onSuccess = { data ->
-                    _uiState.update { state -> state.copy(repos = data.toUIModel()) }
-                    toStableScreenState()
+                    if (data.isNotEmpty()){
+                        _dataState.update { state -> state.copy(repos = data.toUIModel()) }
+                        toStableScreenState()
+                    }else{
+                        toNothingScreenState()
+                    }
+
                 },
                 onError = { toErrorScreenState(message = it) }
             ).launchIn(viewModelScope)

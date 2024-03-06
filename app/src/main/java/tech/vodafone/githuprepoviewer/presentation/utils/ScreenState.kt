@@ -13,23 +13,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
+typealias AnimatedTypeScope = @Composable AnimatedContentScope.()->Unit
+typealias AnimatedTypeScopeHaveString = @Composable AnimatedContentScope.(message:String?) -> Unit
 sealed interface ScreenState{
-    data class InScreenLoading(val id:Int = 0): ScreenState
-    data class Loading(val id:Int = 0): ScreenState
-    data class Stable(val id:Int = 0): ScreenState
-    data class Error(val id:Int = 0,val errorMessage:String?=null): ScreenState
-    data class Idle(val id:Int = 0): ScreenState
+    data object Loading: ScreenState
+    data object Stable: ScreenState
+    data object Nothing: ScreenState
+    data class Error(val message:String?=null): ScreenState
 }
 
-//enum class ScreenState {
-//    LOADING, STABLE, ERROR,IN_SCREEN_LOADING,IDLE
-//}
-
 val ScreenState.isError get() = this == ScreenState.Error()
-val ScreenState.isLoading get() = this == ScreenState.Loading()
+val ScreenState.isLoading get() = this == ScreenState.Loading
+val ScreenState.isEmpty get() = this == ScreenState.Nothing
 
-@Composable
-fun ScreenState.inScreenLoading(content: @Composable () -> Unit) = content()
 
 @Composable
 fun ScreenState.AnimateScreenState(
@@ -40,10 +36,10 @@ fun ScreenState.AnimateScreenState(
             .togetherWith(fadeOut(animationSpec = tween(90)))
     },
     contentAlignment: Alignment = Alignment.TopStart,
-    onError: @Composable AnimatedContentScope.(id:Int,message:String?) -> Unit = {id: Int, message: String? -> },
-    onLoading: @Composable AnimatedContentScope.(id:Int) -> Unit = {},
-    onStable: @Composable AnimatedContentScope.(id:Int) -> Unit = {},
-    onIdle: @Composable AnimatedContentScope.(id:Int) -> Unit = {}
+    onError: AnimatedTypeScopeHaveString?=null,
+    onLoading: AnimatedTypeScope?=null,
+    onStable: AnimatedTypeScope?=null,
+    onNothing: AnimatedTypeScope?=null
 ) {
 
     AnimatedContent(
@@ -55,14 +51,18 @@ fun ScreenState.AnimateScreenState(
         contentKey = ScreenState::hashCode
     ) {
         when (it) {
-            is ScreenState.Error -> onError(it.id,it.errorMessage)
-            is ScreenState.Idle ->  onIdle(it.id)
-            is ScreenState.InScreenLoading -> {
-                onLoading(it.id)
-                onStable(it.id)
+            is ScreenState.Error -> if (onError != null) {
+                onError(it.message)
             }
-            is ScreenState.Loading -> onLoading(it.id)
-            is ScreenState.Stable -> onStable(it.id)
+            is ScreenState.Loading -> if (onLoading != null) {
+                onLoading()
+            }
+            is ScreenState.Stable -> if (onStable != null) {
+                onStable()
+            }
+            is ScreenState.Nothing -> if (onNothing != null) {
+                onNothing()
+            }
         }
     }
 }

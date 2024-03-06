@@ -19,6 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import tech.vodafone.githuprepoviewer.presentation.feature.issues.IssuesRepoEvents
 import tech.vodafone.githuprepoviewer.presentation.navigation.NavigationItem
+import tech.vodafone.githuprepoviewer.presentation.utils.AnimateScreenState
 
 @Composable
 fun ReposScreen(
@@ -33,20 +34,37 @@ fun ReposScreen(
         viewModel.onEvent(ReposEvents.GetRepos)
     }
 
-    LazyColumn(modifier = modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
-
-        item {
-            Text(text = "Helloooo",modifier = Modifier.fillMaxWidth().height(10.dp).clickable {
-                navController.navigate(NavigationItem.Details.route)
-            })
-        }
-        uiState.repos?.let {
-            items(it) { data ->
-                data.name?.let { title -> Text(text = title,modifier = Modifier.fillMaxWidth().height(10.dp).clickable {
-                    navController.navigate(NavigationItem.Details.route)
-                }) }
-
+    screenState.AnimateScreenState(
+        onLoading = {
+            Text(text = "Loading ..")
+        },
+        onError = {
+            it?.let {  Text(text = it) }
+        },
+        onNothing = {
+            Text(text = "Nothing ..")
+        },
+        onStable = {
+            LazyColumn(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                uiState.repos?.let {
+                    items(it) { data ->
+                        data.name?.let { title ->
+                            Text(text = title, modifier = Modifier
+                                .fillMaxWidth()
+                                .height(10.dp)
+                                .clickable {
+                                    navController.navigate(NavigationItem.Details.route)
+                                })
+                        }
+                    }
+                }
             }
-        }
-    }
+        },
+        )
+
+
 }
