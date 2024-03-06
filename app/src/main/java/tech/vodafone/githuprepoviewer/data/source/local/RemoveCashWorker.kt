@@ -12,8 +12,7 @@ class RemoveCashWorker(private val _context:Context,workerParams: WorkerParamete
     override suspend fun doWork(): Result {
 
         if (!isStopped){
-            val differentTime = System.currentTimeMillis() - LocalConstant.MAX_AGE_MILLI
-            RoomDB.invoke(_context).cashDao().deleteCash(differentTime)
+            RoomDB.invoke(_context).cashDao().deleteCash()
         }
 
         return Result.Success()

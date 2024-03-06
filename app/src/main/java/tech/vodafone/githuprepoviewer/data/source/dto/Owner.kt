@@ -2,6 +2,7 @@ package tech.vodafone.githuprepoviewer.data.source.dto
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import tech.vodafone.githuprepoviewer.data.source.local.room.ConverterModel
 
 @Keep
 data class Owner(
@@ -63,4 +64,4 @@ data class Owner(
 
     @SerializedName("repos_url")
     val reposUrl: String?,
-)
+): ConverterModel

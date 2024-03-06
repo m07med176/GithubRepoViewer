@@ -231,10 +231,9 @@ fun CategoryItem(model: ReposUIData.ReposModel,onClick:()->Unit) {
             )
         }
 //        Row {
-////            Spacer(modifier = Modifier.width(8.dp))
-////            ImageLoader(modifier = Modifier.fillMaxWidth(), url = model.image){
-////
-////            }
+//            Spacer(modifier = Modifier.width(8.dp))
+//            ImageLoader(modifier = Modifier.fillMaxWidth(), url = model.image){
+//            }
 //        }
         Spacer(modifier = Modifier.height(20.dp))
 

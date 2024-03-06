@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import tech.vodafone.githuprepoviewer.data.source.dto.CashEntity
+import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 import tech.vodafone.githuprepoviewer.data.source.local.LocalConstant
 
 @Database(
-    entities = [CashEntity::class],
+    entities = [RepositoriesResponseModel::class],
     version = LocalConstant.DB_VERSION,
     exportSchema = false
 )

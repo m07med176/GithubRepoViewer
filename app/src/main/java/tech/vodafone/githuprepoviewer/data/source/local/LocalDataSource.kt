@@ -1,14 +1,14 @@
 package tech.vodafone.githuprepoviewer.data.source.local
 
 import kotlinx.coroutines.flow.Flow
-import tech.vodafone.githuprepoviewer.data.source.dto.CashEntity
+import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 
 interface LocalDataSource{
 
-    fun getCash(city:String): Flow<CashEntity>
+    fun getCash(): Flow<List<RepositoriesResponseModel>>
 
-    suspend fun insertCash(cash: CashEntity)
+    suspend fun insertCash(cash: RepositoriesResponseModel)
 
-
+    fun getCashCount(): Int
 
 }
