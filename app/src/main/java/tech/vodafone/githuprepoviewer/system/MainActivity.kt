@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import tech.vodafone.githuprepoviewer.presentation.navigation.AppNavigation
+import tech.vodafone.githuprepoviewer.presentation.navigation.AppNavigationController
 import tech.vodafone.githuprepoviewer.presentation.theme.GithupRepoViewerTheme
 
 @AndroidEntryPoint
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     AppNavigation(
                         modifier = Modifier.padding(16.dp),
-                        navController = rememberNavController()
+                        navHostController = rememberNavController()
                     )
                 }
             }

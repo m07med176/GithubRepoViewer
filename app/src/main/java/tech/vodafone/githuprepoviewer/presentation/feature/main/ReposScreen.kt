@@ -16,14 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
-import tech.vodafone.githuprepoviewer.presentation.feature.issues.IssuesRepoEvents
-import tech.vodafone.githuprepoviewer.presentation.navigation.NavigationItem
+import tech.vodafone.githuprepoviewer.presentation.navigation.NavigationEvent
 import tech.vodafone.githuprepoviewer.presentation.utils.AnimateScreenState
+import tech.vodafone.githuprepoviewer.presentation.utils.NavigationController
 
 @Composable
 fun ReposScreen(
-    navController: NavHostController,
+    navController: NavigationController,
     modifier: Modifier = Modifier,
     viewModel: ReposViewModel = hiltViewModel()
 ) {
@@ -57,7 +56,7 @@ fun ReposScreen(
                                 .fillMaxWidth()
                                 .height(10.dp)
                                 .clickable {
-                                    navController.navigate(NavigationItem.Details.route)
+                                    navController.onEvent(NavigationEvent.GoToRepositoryDetailsScreen(repo = data.name?:"", owner = data.owner?:""))
                                 })
                         }
                     }

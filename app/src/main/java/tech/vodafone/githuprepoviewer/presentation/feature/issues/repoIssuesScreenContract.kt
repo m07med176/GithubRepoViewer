@@ -4,6 +4,7 @@ import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
 import tech.vodafone.githuprepoviewer.presentation.utils.UIModelBase
 
 
+// UI Model
 data class IssuesRepoUIData(
     val repoIssues: List<RepoIssues>? = null,
 ) : UIModelBase() {
@@ -11,6 +12,7 @@ data class IssuesRepoUIData(
     data class RepoIssues(val title: String?, val author: String?, val state: String?)
 }
 
+// Mapper
 fun RepositoryIssuesResponse.toUIModel() =
     map {
         IssuesRepoUIData.RepoIssues(
@@ -19,3 +21,9 @@ fun RepositoryIssuesResponse.toUIModel() =
             state = it.state
         )
     }
+
+
+// Event
+sealed interface IssuesRepoEvents{
+    data class GetRepoIssues(val owner:String, val repo:String): IssuesRepoEvents
+}

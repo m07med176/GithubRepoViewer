@@ -42,6 +42,3 @@ class ReposViewModel @Inject constructor(private val repository: Repository):
     }
 }
 
-sealed interface ReposEvents{
-    data object GetRepos: ReposEvents
-}

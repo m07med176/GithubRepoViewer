@@ -37,6 +37,3 @@ class RepoIssuesViewModel @Inject constructor(private val repository: Repository
     }
 }
 
-sealed interface IssuesRepoEvents{
-    data class GetRepoIssues(val owner:String, val repo:String): IssuesRepoEvents
-}
