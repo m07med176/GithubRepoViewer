@@ -26,7 +26,8 @@ import tech.vodafone.githuprepoviewer.R
 fun SearchTextField(onValueChanged:(String)->Unit) {
     var search: String by remember { mutableStateOf("") }
     TextField(
-        value = search, onValueChange = {
+        value = search,
+        onValueChange = {
             search = it
             onValueChanged(it)
         },

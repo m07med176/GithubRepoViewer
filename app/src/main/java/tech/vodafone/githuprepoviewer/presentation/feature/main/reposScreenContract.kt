@@ -31,5 +31,7 @@ fun RepositoriesResponse.toUIModel() =
 
 // Event
 sealed interface ReposEvents {
+    data class RequestSearch(val search:String):ReposEvents
+
     data object GetRepos : ReposEvents
 }

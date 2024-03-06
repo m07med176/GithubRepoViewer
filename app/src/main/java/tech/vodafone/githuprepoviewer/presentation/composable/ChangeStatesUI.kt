@@ -51,7 +51,6 @@ fun LottieStateUI(modifier: Modifier,message:String?=null,type: StateOfData) {
         LottieCompositionSpec.RawRes(type.rowId)
     )
 
-
     val progress by animateLottieCompositionAsState(
         composition,
         iterations = LottieConstants.IterateForever,
@@ -61,11 +60,10 @@ fun LottieStateUI(modifier: Modifier,message:String?=null,type: StateOfData) {
     )
 
     Box(modifier = modifier, contentAlignment = Alignment.Center){
-
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
             LottieAnimation(
-                composition,
-                progress,
+                composition = composition,
+                progress = progress,
                 modifier = Modifier.size(250.dp)
             )
             message?.let {
