@@ -1,14 +1,13 @@
-package tech.vodafone.githuprepoviewer.data.repository
+package tech.vodafone.githuprepoviewer.domain.repositories
 
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import kotlinx.coroutines.flow.Flow
-import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
+import tech.vodafone.githuprepoviewer.domain.entities.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
-import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
 
 interface Repository {
 

@@ -1,4 +1,4 @@
-package tech.vodafone.githuprepoviewer.data.source.dto
+package tech.vodafone.githuprepoviewer.domain.entities
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

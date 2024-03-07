@@ -8,16 +8,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
-import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
+import tech.vodafone.githuprepoviewer.domain.entities.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
 import tech.vodafone.githuprepoviewer.data.source.local.LocalDataSource
 import tech.vodafone.githuprepoviewer.data.source.remote.RemoteDataSource
-import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
-import tech.vodafone.githuprepoviewer.data.utils.asResourceFlow
+import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.domain.utils.asResourceFlow
 import tech.vodafone.githuprepoviewer.di.IoDispatcher
+import tech.vodafone.githuprepoviewer.domain.repositories.Repository
 import javax.inject.Inject
 
 class RepositoryImpl  @Inject constructor(

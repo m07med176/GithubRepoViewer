@@ -6,15 +6,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 
-abstract class BaseScreenViewModel<S,T>(
-    dataState: S,
+abstract class BaseViewModel<T>(
     initialScreenState: ScreenState = ScreenState.Loading
 ) : ViewModel() {
-
-    @Suppress("PropertyName")
-    protected open val _dataState = MutableStateFlow(dataState)
-    protected val uiStateValue get() = _dataState.value
-    val uiState get() = _dataState.asStateFlow()
 
     private val _screenState by lazy { MutableStateFlow(initialScreenState) }
     val screenState get() = _screenState.asStateFlow()

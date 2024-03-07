@@ -1,14 +1,10 @@
 package tech.vodafone.githuprepoviewer.data.source.remote
 
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
+import tech.vodafone.githuprepoviewer.domain.entities.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
-import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.EndPoints
-import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
 
 interface RemoteDataSource {
     suspend fun getRepositories(): NetworkResponse<RepositoriesResponse, BadeResponse>

@@ -1,22 +1,12 @@
 package tech.vodafone.githuprepoviewer.presentation.feature.main
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -29,8 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,12 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
 import kotlinx.coroutines.launch
-import tech.vodafone.githuprepoviewer.presentation.navigation.NavigationEvent
-import tech.vodafone.githuprepoviewer.presentation.utils.AnimateScreenState
+import tech.vodafone.githuprepoviewer.domain.entities.ReposEntity
 import tech.vodafone.githuprepoviewer.presentation.utils.NavigationController
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -120,7 +104,7 @@ fun ReposScreen(
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
 
-    val searchState = viewModel.pagingData.collectAsLazyPagingItems()
+//    val searchState = viewModel.pagingData.collectAsLazyPagingItems()
 
 
 //    LaunchedEffect(true){
@@ -157,29 +141,29 @@ fun ReposScreen(
         }
 
 
-        LazyColumn(modifier = modifier.fillMaxSize(),) {
-//            uiState.repos?.let {
-                items(
-                    count = searchState.itemCount,
-                    key = searchState.itemKey{ item -> item.id},
-                    contentType = searchState.itemContentType { "Repos" }
-                ) { index ->
-                    val repo = searchState[index]
-                    repo?.let {
-                        val data = it.toUIModel()
-                        CategoryItem(data){
-                            navController.onEvent(
-                                NavigationEvent.GoToRepositoryDetailsScreen(
-                                    repo = data.name ?: "",
-                                    owner = data.owner ?: ""
-                                )
-                            )
-                        }
-//                    }
-                }
-
-            }
-        }
+//        LazyColumn(modifier = modifier.fillMaxSize(),) {
+////            uiState.repos?.let {
+//                items(
+//                    count = searchState.itemCount,
+//                    key = searchState.itemKey{ item -> item.id},
+//                    contentType = searchState.itemContentType { "Repos" }
+//                ) { index ->
+//                    val repo = searchState[index]
+//                    repo?.let {
+//                        val data = it.toUIModel()
+//                        CategoryItem(data){
+//                            navController.onEvent(
+//                                NavigationEvent.GoToRepositoryDetailsScreen(
+//                                    repo = data.name ?: "",
+//                                    owner = data.owner ?: ""
+//                                )
+//                            )
+//                        }
+////                    }
+//                }
+//
+//            }
+//        }
 //        screenState.AnimateScreenState(
 //            onStable = {
 //
@@ -196,7 +180,7 @@ fun ReposScreen(
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun CategoryItemPreview() {
-    val category = ReposUIData.ReposModel(
+    val category = ReposEntity.ReposModel(
         name = "Reuters",
         owner = "Ahmed",
         description = "dsfdsfgsdgfdgfdg",
@@ -209,7 +193,7 @@ fun CategoryItemPreview() {
 
 
 @Composable
-fun CategoryItem(model: ReposUIData.ReposModel,onClick:()->Unit) {
+fun CategoryItem(model: ReposEntity.ReposModel, onClick:()->Unit) {
     Column(horizontalAlignment = Alignment.Start, modifier = Modifier
         .padding(top = 24.dp)
         .padding(horizontal = 20.dp).clickable { onClick() }

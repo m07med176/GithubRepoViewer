@@ -3,7 +3,7 @@ package tech.vodafone.githuprepoviewer.data.source.remote.retrofit.adapters
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
-import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 

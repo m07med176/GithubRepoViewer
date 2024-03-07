@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import tech.vodafone.githuprepoviewer.domain.entities.IssuesRepoEntity
 import tech.vodafone.githuprepoviewer.presentation.utils.AnimateScreenState
 import tech.vodafone.githuprepoviewer.presentation.utils.NavigationController
 
@@ -92,7 +93,7 @@ fun IssuesScreen(
 @Preview(showBackground = true)
 @Composable
 fun IssueItemPreview() {
-    val data = IssuesRepoUIData.RepoIssues(
+    val data = IssuesRepoEntity.RepoIssues(
         title = "CNN",
         author = "Mohamed",
         state  = "State"
@@ -104,7 +105,7 @@ fun IssueItemPreview() {
 
 
 @Composable
-fun IssueItem(model: IssuesRepoUIData.RepoIssues) {
+fun IssueItem(model: IssuesRepoEntity.RepoIssues) {
 
     Column(modifier = Modifier
         .padding(horizontal = 20.dp)

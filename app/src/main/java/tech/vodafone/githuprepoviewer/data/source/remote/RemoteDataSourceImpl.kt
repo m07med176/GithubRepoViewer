@@ -1,13 +1,6 @@
 package tech.vodafone.githuprepoviewer.data.source.remote
 
-import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
-import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
 import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.CallApi
-import tech.vodafone.githuprepoviewer.data.utils.NetworkResponse
 
 class RemoteDataSourceImpl(
     private val api: CallApi

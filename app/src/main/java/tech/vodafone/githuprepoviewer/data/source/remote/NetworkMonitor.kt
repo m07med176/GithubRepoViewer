@@ -1,4 +1,4 @@
-package tech.vodafone.githuprepoviewer.data.utils
+package tech.vodafone.githuprepoviewer.data.source.remote
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,17 +1,17 @@
-package tech.vodafone.githuprepoviewer.data.utils
+package tech.vodafone.githuprepoviewer.domain.utils
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
-import tech.vodafone.githuprepoviewer.data.source.dto.BadeResponse
+import tech.vodafone.githuprepoviewer.domain.entities.BadeResponse
 import java.io.IOException
 
 fun <T : Any,K:Any> Flow<NetworkResponse<T, K>>.asResourceFlow() =
     this.onEach {
         when(it){
             is NetworkResponse.Loading -> NetworkResponse.Loading
-            is NetworkResponse.Success ->  NetworkResponse.Success(it.body)
+            is NetworkResponse.Success -> NetworkResponse.Success(it.body)
             is NetworkResponse.NetworkError -> NetworkResponse.NetworkError(it.error)
             is NetworkResponse.ApiError -> NetworkResponse.ApiError(it.body, it.code)
             is NetworkResponse.UnknownError -> NetworkResponse.UnknownError(Throwable(it.toString()))

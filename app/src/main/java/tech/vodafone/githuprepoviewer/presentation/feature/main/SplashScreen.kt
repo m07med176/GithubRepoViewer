@@ -57,7 +57,7 @@ fun SplashScreen(
 
 @Composable
 fun SplashAnimationWithContent() {
-    val logo = painterResource(id = R.drawable.ic_launcher_foreground)
+    val logo = painterResource(id = R.drawable.logo)
     val angle1Y = remember {
         Animatable(20f)
     }
@@ -76,14 +76,14 @@ fun SplashAnimationWithContent() {
     Surface(Modifier.fillMaxSize()) {
         Canvas(modifier = Modifier
             .fillMaxSize()
-            .background(Color.Red),
+            .background(Color.White),
             onDraw = {
                 withTransform({
                     // translate(angle1Y.value)
                     scale(scaleX = angle1Y.value, scaleY = angle2.value)
 
                 }) {
-                    drawCircle(color = Color.White, radius = 8f)
+                    drawCircle(color = Color.Red, radius = 8f)
 
                 }
             }
@@ -94,7 +94,6 @@ fun SplashAnimationWithContent() {
                 .padding(horizontal = 96.dp),
             contentScale = ContentScale.Fit,
             painter = logo,
-            colorFilter = ColorFilter.tint(Color.Magenta),
             contentDescription = null
         )
     }

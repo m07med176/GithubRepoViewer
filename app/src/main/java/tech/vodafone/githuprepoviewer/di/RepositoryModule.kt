@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import tech.vodafone.githuprepoviewer.data.repository.Repository
+import tech.vodafone.githuprepoviewer.domain.repositories.Repository
 import tech.vodafone.githuprepoviewer.data.repository.RepositoryImpl
 
 @Module
