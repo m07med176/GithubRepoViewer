@@ -30,7 +30,7 @@ and sync then build and run
 ## GIF
 
 <hr>
-<img src="hhttps://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/video.gif" alt="GIF">
+<img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/video.gif" alt="GIF">
 <hr>
 
 ## Screenshots
