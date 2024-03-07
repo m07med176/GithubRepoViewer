@@ -27,23 +27,28 @@ and sync then build and run
 - Night Mode and Dark Mode
 - Material3 with system design
 
+## GIF
+
+<hr>
+<img src="hhttps://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/video.gif" alt="GIF">
+<hr>
+
 ## Screenshots
 
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%201.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%202.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%203.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%204.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%205.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%206.png)
-
-![Untitled](GitHub%20repo%20viewer%20f3768f22802f45e7b3fc09fd4ebca534/Untitled%207.png)
+<table>
+  <tr>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/1.png" alt="Image 1"></td>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/2.png" alt="Image 2"></td>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/3.png" alt="Image 3"></td>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/4.png" alt="Image 4"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/5.png" alt="Image 5"></td>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/6.png" alt="Image 6"></td>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/7.png" alt="Image 7"></td>
+    <td align="center"><img src="https://github.com/m07med176/GithubRepoViewer/blob/master/screenshots/8.png" alt="Image 8"></td>
+  </tr>
+</table>
 
 ## App Design
 
