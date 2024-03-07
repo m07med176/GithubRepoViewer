@@ -1,28 +1,32 @@
 package tech.vodafone.githuprepoviewer.domain.repositories
 
-import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import tech.vodafone.githuprepoviewer.domain.entities.BadeResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
-import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
-import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.data.source.local.paging.RepositoryPagingSource
+import tech.vodafone.githuprepoviewer.data.source.local.paging.SearchRepositoryPagingSource
+import tech.vodafone.githuprepoviewer.domain.entities.DetailsRepoEntity
+import tech.vodafone.githuprepoviewer.domain.entities.IssuesRepoEntity
+import tech.vodafone.githuprepoviewer.domain.entities.ReposEntity
+import tech.vodafone.githuprepoviewer.domain.utils.ResourceState
 
 interface Repository {
 
-    fun getPagingCash(): Flow<PagingData<RepositoriesResponseModel>>
+    fun getRepos(): RepositoryPagingSource
+    fun searchRepos(search:String): SearchRepositoryPagingSource
 
-    suspend fun getRepositories(): Flow<NetworkResponse<RepositoriesResponse, BadeResponse>>
+    suspend fun getRepositories(): Flow<ResourceState<List<ReposEntity>>>
 
     suspend fun getRepositoryIssues(
         owner:String,
         repo:String,
-    ): Flow<NetworkResponse<RepositoryIssuesResponse, BadeResponse>>
+    ): Flow<ResourceState<List<IssuesRepoEntity>>>
 
     suspend fun getRepositoryDetails(
         owner:String,
         repo:String,
-    ): Flow<NetworkResponse<RepositoryDetailsResponse, BadeResponse>>
+    ): Flow<ResourceState<DetailsRepoEntity>>
+
+    suspend fun insertCash(cash: List<ReposEntity>)
+
+    fun getCashCount(): Int
 
 }

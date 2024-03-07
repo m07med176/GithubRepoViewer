@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
-import tech.vodafone.githuprepoviewer.data.source.local.LocalConstant
+import tech.vodafone.githuprepoviewer.data.source.local.LocalConfig
 
 @Database(
     entities = [RepositoriesResponseModel::class],
-    version = LocalConstant.DB_VERSION,
+    version = LocalConfig.DB_VERSION,
     exportSchema = false
 )
 @TypeConverters(CashConverters::class)
@@ -30,7 +30,7 @@ abstract class RoomDB : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 RoomDB::class.java,
-                LocalConstant.DB_NAME
+                LocalConfig.DB_NAME
             )
                 .fallbackToDestructiveMigration()
                 .build()

@@ -5,17 +5,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
-import kotlinx.coroutines.flow.Flow
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponseModel
 
 @Dao
 interface CashDao {
 
-    @Query("SELECT * FROM cash_table")
-    fun getPagingCash(): PagingSource<Int,RepositoriesResponseModel>
+    @Query("SELECT * FROM cash_table ORDER BY id ASC LIMIT :limit OFFSET :offset")
+    fun getRepos(limit: Int, offset: Int): List<RepositoriesResponseModel>
 
-//    @Upsert
+    @Query("SELECT * FROM cash_table WHERE name LIKE '%' || :searchQuery || '%' ORDER BY id ASC LIMIT :limit OFFSET :offset")
+    fun searchReposByName(searchQuery: String, limit: Int, offset: Int): List<RepositoriesResponseModel>
+    @Query("SELECT * FROM cash_table")
+    fun getPagingCash2(): PagingSource<Int,RepositoriesResponseModel>
+
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCash(cash: List<RepositoriesResponseModel>)
 

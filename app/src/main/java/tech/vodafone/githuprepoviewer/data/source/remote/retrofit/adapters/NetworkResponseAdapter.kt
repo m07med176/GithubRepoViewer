@@ -4,7 +4,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Converter
-import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.data.source.NetworkResponse
 import java.lang.reflect.Type
 
 class NetworkResponseAdapter<S : Any, E : Any>(

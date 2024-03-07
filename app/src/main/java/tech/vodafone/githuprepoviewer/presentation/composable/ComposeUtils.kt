@@ -12,17 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@Composable
-fun changeStatusBarColor(color:Color=Color.White){
-    val systemUiController = rememberSystemUiController()
-    val useDarkIcons = !isSystemInDarkTheme()
-    systemUiController.setStatusBarColor(
-        color = color,
-        darkIcons = true
-    )
-}
-
-
 
 @Composable
 fun SlideInOutAnimation(duration:Int =200,content: @Composable () -> Unit) {

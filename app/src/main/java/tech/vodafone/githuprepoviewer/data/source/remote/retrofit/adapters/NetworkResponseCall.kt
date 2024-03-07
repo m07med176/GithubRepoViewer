@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Converter
 import retrofit2.Response
-import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.data.source.NetworkResponse
 import java.io.IOException
 
 internal class NetworkResponseCall<S : Any, E : Any>(

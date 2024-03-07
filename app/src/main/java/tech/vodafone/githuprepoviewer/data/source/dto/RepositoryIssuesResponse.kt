@@ -3,9 +3,22 @@ package tech.vodafone.githuprepoviewer.data.source.dto
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import tech.vodafone.githuprepoviewer.domain.utils.DomainMapping
+import tech.vodafone.githuprepoviewer.domain.entities.IssuesRepoEntity
 
 @Keep
-class RepositoryIssuesResponse : ArrayList<RepositoryIssuesResponseItem>()
+class RepositoryIssuesResponse : ArrayList<RepositoryIssuesResponseItem>(),
+    DomainMapping<List<IssuesRepoEntity>> {
+    override fun toDomainModel(): List<IssuesRepoEntity> {
+       return this.map {
+            IssuesRepoEntity(
+                title = it.title,
+                author = it.authorAssociation,
+                state = it.state
+            )
+        }
+    }
+}
 
 @Keep
 data class RepositoryIssuesResponseItem(

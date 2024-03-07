@@ -1,4 +1,4 @@
-package tech.vodafone.githuprepoviewer.presentation.utils
+package tech.vodafone.githuprepoviewer.presentation.composable
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentScope
@@ -9,6 +9,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,23 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tech.vodafone.githuprepoviewer.R
-import tech.vodafone.githuprepoviewer.presentation.composable.LottieStateUI
-import tech.vodafone.githuprepoviewer.presentation.composable.StateOfData
 
 typealias AnimatedTypeScope = @Composable AnimatedContentScope.() -> Unit
-typealias AnimatedTypeScopeHaveString = @Composable AnimatedContentScope.(message: String?) -> Unit
+typealias AnimatedTypeScopeOfError = @Composable AnimatedContentScope.(exception: Throwable) -> Unit
 
 sealed interface ScreenState {
     data object Loading : ScreenState
     data object Stable : ScreenState
     data object Nothing : ScreenState
-    data class Error(val message: String? = null) : ScreenState
+    data class Error(val exception: Throwable) : ScreenState
 }
-
-val ScreenState.isError get() = this == ScreenState.Error()
-val ScreenState.isLoading get() = this == ScreenState.Loading
-val ScreenState.isEmpty get() = this == ScreenState.Nothing
-
 
 @Composable
 fun ScreenState.AnimateScreenState(
@@ -43,7 +38,8 @@ fun ScreenState.AnimateScreenState(
             .togetherWith(fadeOut(animationSpec = tween(90)))
     },
     contentAlignment: Alignment = Alignment.TopStart,
-    onError: AnimatedTypeScopeHaveString? = null,
+    onClickRetry:(()->Unit)?=null,
+    onError: AnimatedTypeScopeOfError? = null,
     onLoading: AnimatedTypeScope? = null,
     onStable: AnimatedTypeScope,
     onNothing: AnimatedTypeScope? = null
@@ -59,12 +55,13 @@ fun ScreenState.AnimateScreenState(
     ) {
         when (it) {
             is ScreenState.Error -> if (onError != null) {
-                onError(it.message)
+                onError(it.exception)
             } else {
                 LottieStateUI(
-                    modifier = Modifier.size(150.dp),
-                    message = it.message,
-                    type = StateOfData.Error
+                    modifier = modifier,
+                    message = handleExceptionToString(exception = it.exception),
+                    type = StateOfData.Error,
+                    onClickRetry = onClickRetry
                 )
             }
 
@@ -83,9 +80,10 @@ fun ScreenState.AnimateScreenState(
                 onNothing()
             } else {
                 LottieStateUI(
-                    modifier = Modifier.size(150.dp),
+                    modifier = modifier,
                     message = stringResource(R.string.no_data),
-                    type = StateOfData.NoData
+                    type = StateOfData.NoData,
+                    onClickRetry = onClickRetry
                 )
             }
         }

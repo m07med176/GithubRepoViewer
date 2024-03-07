@@ -11,14 +11,14 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AppTextView(modifier:Modifier = Modifier,value:String,color:Color,size:TextUnit) {
+fun AppTextView(modifier:Modifier = Modifier,value:String,color:Color,style:TextStyle) {
     Text(
         text = value,
-        style = TextStyle(color = color,fontSize = size, fontWeight = FontWeight(800)),
+        style = style,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         softWrap = true,
+        color = color,
         modifier = modifier,
-
     )
 }

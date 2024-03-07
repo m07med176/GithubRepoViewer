@@ -6,7 +6,7 @@ import tech.vodafone.githuprepoviewer.domain.entities.BadeResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoriesResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryIssuesResponse
 import tech.vodafone.githuprepoviewer.data.source.dto.RepositoryDetailsResponse
-import tech.vodafone.githuprepoviewer.domain.utils.NetworkResponse
+import tech.vodafone.githuprepoviewer.data.source.NetworkResponse
 
 
 /**

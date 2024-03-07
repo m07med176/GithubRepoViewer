@@ -1,6 +1,6 @@
 import java.util.Properties
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id(id = "com.android.application")
     id(id = "kotlin-android")
@@ -70,10 +70,10 @@ android {
 
 dependencies {
 
+    implementation(libs.core)
     val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
 
+    implementation(composeBom)
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -88,25 +88,16 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    // Tooling
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    // Instrumented tests
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    // Local tests: jUnit, coroutines, Android runner
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlinx.coroutines.test)
 
-    // Instrumented tests: jUnit rules and runners
-    androidTestImplementation(libs.androidx.test.core)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.runner)
+
+
+
 
     // Paging 3
-    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
-    implementation("androidx.paging:paging-compose:3.2.1")
-    implementation("androidx.room:room-paging:2.6.1")
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.room.paging)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -115,10 +106,10 @@ dependencies {
 
     // Hilt Dependency Injection
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(dependencyNotation = "com.google.dagger:hilt-android:2.48.1")
-    kapt(dependencyNotation = "com.google.dagger:hilt-compiler:2.48.1")
-    kapt(dependencyNotation = "androidx.hilt:hilt-compiler:1.1.0")
-    implementation(dependencyNotation = "androidx.hilt:hilt-work:1.1.0")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kapt(libs.androidx.hilt.compiler)
+    implementation(libs.androidx.hilt.work)
 
 
     // Retrofit
@@ -140,5 +131,54 @@ dependencies {
     // Accompanist
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.insets)
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta")
+    implementation(libs.accompanist.systemuicontroller)
+    implementation (libs.accompanist.swiperefresh)
+
+    // Markdown
+    implementation(libs.compose.markdown)
+
+    // Sweet Toast
+    implementation("com.github.tfaki:ComposableSweetToast:1.0.0")
+
+    // Datastore
+    implementation(libs.androidx.datastore.preferences)
+
+    // #---------------------------------------------------------------#
+
+    // Depugging
+    // Tooling
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    // #---------------------------------------------------------------#
+
+    // Instrumented tests
+    androidTestImplementation(composeBom)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation (libs.espresso.core)
+    androidTestImplementation (libs.test.core.testing)
+    androidTestImplementation (libs.test.coroutineTest)
+    androidTestImplementation (libs.androidx.espresso.contrib)
+    androidTestImplementation (libs.core.ktx)
+    androidTestImplementation (libs.rules)
+    androidTestImplementation (libs.runner)
+    // #---------------------------------------------------------------#
+
+    // Local tests
+
+    // Mokito
+    implementation(libs.test.mockito)
+    implementation(libs.test.mockitoAndroid)
+    implementation(libs.androidx.test.runner)
+    // DI
+    testImplementation(libs.hilt.android.testing)
+
+    testImplementation(libs.junit)
+    // Test Coroutine
+    implementation(libs.test.coroutineTest)
+    // #---------------------------------------------------------------#
+
+
+
 }

@@ -10,6 +10,8 @@ import dagger.hilt.components.SingletonComponent
 import tech.vodafone.githuprepoviewer.data.source.local.LocalDataSource
 import tech.vodafone.githuprepoviewer.data.source.local.LocalDataSourceImpl
 import tech.vodafone.githuprepoviewer.data.source.local.room.RoomDB
+import tech.vodafone.githuprepoviewer.data.source.remote.ConnectivityManagerNetworkMonitor
+import tech.vodafone.githuprepoviewer.data.source.remote.NetworkMonitor
 import tech.vodafone.githuprepoviewer.data.source.remote.RemoteDataSource
 import tech.vodafone.githuprepoviewer.data.source.remote.RemoteDataSourceImpl
 import tech.vodafone.githuprepoviewer.data.source.remote.retrofit.RetrofitInstance
@@ -18,6 +20,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    /**
+     * # Network
+     */
+    @Provides
+    @Singleton
+    fun provideNetworkMonitor(@ApplicationContext context: Context): NetworkMonitor {
+        return ConnectivityManagerNetworkMonitor(context)
+    }
 
     /**
      * # Retrofit Network

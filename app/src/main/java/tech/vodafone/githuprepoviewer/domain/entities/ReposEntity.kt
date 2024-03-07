@@ -1,16 +1,11 @@
 package tech.vodafone.githuprepoviewer.domain.entities
 
-import tech.vodafone.githuprepoviewer.presentation.utils.UIModelBase
-
-
+// repository's name, owner, description, and star count
 data class ReposEntity(
-    val repos: List<ReposModel>? = null,
-) : UIModelBase() {
-    // repository's name, owner, description, and star count
-    data class ReposModel(
-        val name: String?,
-        val description: String?,
-        val owner: String?,
-        val starCount: Int?
-    )
-}
+    val id:Int?=null,
+    val ownerId:Int?=null,
+    val name: String,
+    val description: String?=null,
+    val owner: String?=null,
+    val starCount: Int?=null
+)

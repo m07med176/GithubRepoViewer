@@ -10,6 +10,7 @@ import tech.vodafone.githuprepoviewer.presentation.feature.details.RepoDetailsSc
 import tech.vodafone.githuprepoviewer.presentation.feature.issues.IssuesScreen
 import tech.vodafone.githuprepoviewer.presentation.feature.main.ReposScreen
 import tech.vodafone.githuprepoviewer.presentation.feature.main.SplashScreen
+import tech.vodafone.githuprepoviewer.system.DataStoreUtil
 
 enum class NavigationItems(val path: String) {
     Splash("splash"),
@@ -21,6 +22,7 @@ enum class NavigationItems(val path: String) {
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
+    dataStoreUtil: DataStoreUtil,
     navHostController: NavHostController,
     startDestination: String = NavigationItems.Splash.path,
 ) {
@@ -40,7 +42,8 @@ fun AppNavigation(
             SlideInOutAnimation {
                 ReposScreen(
                     navController = navController,
-                    modifier = modifier
+                    modifier = modifier,
+                    dataStoreUtil = dataStoreUtil
                 )
             }
         }

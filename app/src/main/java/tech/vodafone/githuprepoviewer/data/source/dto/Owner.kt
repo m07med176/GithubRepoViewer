@@ -9,59 +9,22 @@ data class Owner(
 
     // Ids
     @SerializedName("id")
-    val id: Int?,
-
-    @SerializedName("gravatar_id")
-    val gravatarId: String?,
-
-    @SerializedName("node_id")
-    val nodeId: String?,
+    val id: Int? = null,
 
     // Names
     @SerializedName("login")
-    val login: String?,
+    val login: String? = null,
 
     @SerializedName("type")
-    val type: String?,
+    val type: String?=null,
 
     // Booleans
     @SerializedName("site_admin")
-    val siteAdmin: Boolean?,
+    val siteAdmin: Boolean? =null,
 
-    // Urls
+    // URls
     @SerializedName("avatar_url")
-    val avatarUrl: String?,
+    val avatarUrl: String? =null,
 
-    @SerializedName("events_url")
-    val eventsUrl: String?,
 
-    @SerializedName("followers_url")
-    val followersUrl: String?,
-
-    @SerializedName("following_url")
-    val followingUrl: String?,
-
-    @SerializedName("gists_url")
-    val gistsUrl: String?,
-
-    @SerializedName("html_url")
-    val htmlUrl: String?,
-
-    @SerializedName("url")
-    val url: String?,
-
-    @SerializedName("starred_url")
-    val starredUrl: String?,
-
-    @SerializedName("subscriptions_url")
-    val subscriptionsUrl: String?,
-
-    @SerializedName("organizations_url")
-    val organizationsUrl: String?,
-
-    @SerializedName("received_events_url")
-    val receivedEventsUrl: String?,
-
-    @SerializedName("repos_url")
-    val reposUrl: String?,
 ): ConverterModel

@@ -4,6 +4,7 @@ import androidx.annotation.RawRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,15 +36,15 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import tech.vodafone.githuprepoviewer.R
 
-enum class StateOfData(val color:Color,@RawRes val rowId:Int){
-    Error(Color.Red, R.raw.network),
-    NoData(Color.Black,R.raw.empty),
-    Loading(Color.Blue,R.raw.loading),
-    Idle(Color.Blue,R.raw.idle)
+enum class StateOfData(@RawRes val rowId:Int){
+    Error(R.raw.network),
+    NoData(R.raw.empty),
+    Loading(R.raw.loading),
+    Idle(R.raw.idle)
 }
 
 @Composable
-fun LottieStateUI(modifier: Modifier,message:String?=null,type: StateOfData) {
+fun LottieStateUI(modifier: Modifier,message:String?=null,type: StateOfData,onClickRetry:(()->Unit)?=null) {
     val isPlaying by remember {
         mutableStateOf(true)
     }
@@ -51,6 +57,13 @@ fun LottieStateUI(modifier: Modifier,message:String?=null,type: StateOfData) {
         LottieCompositionSpec.RawRes(type.rowId)
     )
 
+
+    val color = when(type){
+        StateOfData.Error -> MaterialTheme.colorScheme.error
+        StateOfData.NoData -> MaterialTheme.colorScheme.error
+        StateOfData.Loading ->  MaterialTheme.colorScheme.secondary
+        StateOfData.Idle ->  MaterialTheme.colorScheme.primary
+    }
     val progress by animateLottieCompositionAsState(
         composition,
         iterations = LottieConstants.IterateForever,
@@ -69,11 +82,22 @@ fun LottieStateUI(modifier: Modifier,message:String?=null,type: StateOfData) {
             message?.let {
                 AppTextView(
                     value = it,
-                    color = type.color,
+                    color = color,
                     modifier = Modifier.padding(horizontal = 10.dp),
-                    size = 20.sp
+                    style = MaterialTheme.typography.headlineLarge
                 )
             }
+            onClickRetry?.let {
+                OutlinedButton(onClick = onClickRetry) {
+                    AppTextView(
+                        value = stringResource(R.string.try_again),
+                        color = color,
+                        modifier = Modifier.padding(horizontal = 10.dp),
+                        style = MaterialTheme.typography.headlineMedium.copy(fontSize = 17.sp)
+                    )
+                }
+            }
+
         }
 
     }
@@ -90,4 +114,16 @@ fun LottieFilePreview() {
         Spacer(modifier = Modifier.height(10.dp))
         LottieStateUI(modifier = Modifier.size(150.dp), message = "No network", type = StateOfData.Error)
     }
+}
+
+
+
+@Composable
+fun LoadingItem() {
+    CircularProgressIndicator(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .wrapContentWidth(Alignment.CenterHorizontally)
+    )
 }
